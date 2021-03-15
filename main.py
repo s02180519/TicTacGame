@@ -8,7 +8,7 @@ class TicTacGame:
     def show_board(self):
         """show board"""
         for i in range(1, 10, 3):
-            print(self.board[i - 1], '|', self.board[i], '|', self.board[i + 1], '\n')
+            print("{0}|{1}|{2}".format(self.board[i-1], self.board[i], self.board[i+1]))
 
     def validate_input(self, move):
         """check user`s input"""
@@ -42,7 +42,8 @@ class TicTacGame:
             if self.next_move('x') == 'x':
                 return 'x'
             if self.board_complete() is True:
-                return None
+                self.show_board()
+                return "Nobody"
             if self.next_move('o') == 'o':
                 return 'o'
 
@@ -56,5 +57,11 @@ class TicTacGame:
         return False
 
 if __name__ == '__main__':
-    GAME = TicTacGame()
-    print("'", GAME.start_game(), "' won!!!")
+    START_GAME = input("Do you want to start the game? y/n\n")
+    while START_GAME != "n":
+        if START_GAME == "y":
+            GAME = TicTacGame()
+            print("'{0}'won!!!".format(GAME.start_game()))
+            START_GAME = input("Do you want to start the game? y/n\n")
+        else:
+            START_GAME = input("invalid character\nEnter y/n symbol\n")
